@@ -1,12 +1,12 @@
-function login() {
+function apic_get_token(ip, username, password) {
 	return $.ajax({
 		type : 'POST',
-		url  : creds.url + '/api/aaaLogin.json?gui-token-request=yes',
+		url  : 'https://' + ip + '/api/aaaLogin.json?gui-token-request=yes',
 		data : JSON.stringify({
 			aaaUser : {
 				attributes : {
-					name : creds.name,
-					pwd  : creds.pwd
+					name : username,
+					pwd  : password
 				}
 			}
 		})

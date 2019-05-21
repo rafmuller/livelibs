@@ -335,9 +335,9 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Cisco Live LTRACI-3225 Dashboard</h1>
             <a id='login_form_button' href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-              <i  class="fas fa-lock fa-sm text-white-50"></i> Login to APIC</a>
+              <i  class="fas fa-lock fa-sm text-white-50"></i> Login Form</a>
           </div>
-          <form>
+          <form onsubmit="return false;">
               <div id='login2apic' class="form-row" style='magin-top:10px; margin-bottom:30px; display: none'>
                 <div class="col">
                   <label>APIC IP Address:</label>
@@ -349,11 +349,11 @@
                 </div>
                 <div class="col">
                   <label>Password:</label>
-                  <input type="password" id='apic_pass' name='apicpass' class="form-control" placeholder="">
+                  <input type="password" id='apic_pass' name='apicpass' class="form-control" >
                 </div>
                 <div class="col">
                     <label>&nbsp;</label>
-                    <button id='apic_login_button' class='btn btn-primary btn-block'>Login</button>
+                    <button id='apic_login_button' class='btn btn-primary btn-block'>Login to APIC</button>
                 </div>
               </div>
             </form>
@@ -702,6 +702,10 @@ $(document).ready(function(){
         apic_user = $('#apic_user').val();
         apic_pass = $('#apic_pass').val();
         console.log( apic_ip, apic_user, apic_pass)
+        apic_get_token(apic_ip, apic_user, apic_pass).then(function(data){
+            var attrs = data['imdata'][0]['aaaLogin']['attributes'];
+            
+        })
         $("#login2apic").hide();
     });
 
