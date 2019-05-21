@@ -31,9 +31,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-toolbox"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">LTRACI-3225</div>
       </a>
 
       <!-- Divider -->
@@ -298,7 +298,7 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Cisco Live Student</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -333,9 +333,30 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+            <h1 class="h3 mb-0 text-gray-800">Cisco Live LTRACI-3225 Dashboard</h1>
+            <a id='login_form_button' href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+              <i  class="fas fa-lock fa-sm text-white-50"></i> Login to APIC</a>
           </div>
+          <form>
+              <div id='login2apic' class="form-row" style='magin-top:10px; margin-bottom:30px; display: none'>
+                <div class="col">
+                  <label>APIC IP Address:</label>
+                  <input type="text" id='apic_ip' name='apic_ip' class="form-control" placeholder="10.0.226.4x">
+                </div>
+                <div class="col">
+                  <label>Username:</label>
+                  <input type="text" id='apic_user' name='apicuser' class="form-control" placeholder="aciproglabXX">
+                </div>
+                <div class="col">
+                  <label>Password:</label>
+                  <input type="password" id='apic_pass' name='apicpass' class="form-control" placeholder="">
+                </div>
+                <div class="col">
+                    <label>&nbsp;</label>
+                    <button id='apic_login_button' class='btn btn-primary btn-block'>Login</button>
+                </div>
+              </div>
+            </form>
 
           <!-- Content Row -->
           <div class="row">
@@ -346,11 +367,11 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Endpoints</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">4,412</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                      <i class="fas fa-laptop fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -363,11 +384,11 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Tenants</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">24</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                      <i class="fas fa-user fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -380,20 +401,20 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Fabric Capacity</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">5%</div>
                         </div>
                         <div class="col">
                           <div class="progress progress-sm mr-2">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      <i class="fas fa-battery-three-quarters fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -402,12 +423,12 @@
 
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
+              <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Critical Alerts</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">14</div>
                     </div>
                     <div class="col-auto">
                       <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -581,19 +602,7 @@
 
             <div class="col-lg-6 mb-4">
 
-              <!-- Illustrations -->
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                  <div class="text-center">
-                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="">
-                  </div>
-                  <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a constantly updated collection of beautiful svg images that you can use completely free and without attribution!</p>
-                  <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on unDraw &rarr;</a>
-                </div>
-              </div>
+
 
               <!-- Approach -->
               <div class="card shadow mb-4">
@@ -655,12 +664,18 @@
     </div>
   </div>
 
+
+
+
   <!-- Bootstrap core JavaScript-->
   <script src="js/jquery-3.3.1.js"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
   <script src="js/jquery.easing.min.js"></script>
+
+  <!-- All ACI JS files -->
+  <script src="js/apic_auth.js"></script>
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
@@ -673,5 +688,27 @@
   <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#login_form_button').click(function(){
+        $("#login2apic").show();
+    });
+
+    $('#apic_login_button').click(function(){
+        apic_ip = $('#apic_ip').val();
+        apic_user = $('#apic_user').val();
+        apic_pass = $('#apic_pass').val();
+        console.log( apic_ip, apic_user, apic_pass)
+        $("#login2apic").hide();
+    });
+
+});
+
+
+
+</script>
 
 </html>
