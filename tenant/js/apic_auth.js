@@ -18,3 +18,12 @@ function set_apic_cookies(data) {
 	$.cookie('token', data['imdata'][0]['aaaLogin']['attributes']['token'], { path: '/', expires: 1 });
 	$.cookie('urlToken', data['imdata'][0]['aaaLogin']['attributes']['urlToken'], { path: '/', expires: 1 });
 }
+
+function logout_apic() {
+	$.removeCookie('havetoken');
+	$.removeCookie('token');
+	$.removeCookie('urltoken');
+	$.removeCookie('apic_ip');
+	$.removeCookie('apic_user');
+	$.removeCookie('apic_pass');
+}

@@ -370,7 +370,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="/" onclick='logout_apic();'>Logout</a>
         </div>
       </div>
     </div>
@@ -418,6 +418,10 @@ $(document).ready(function(){
         $.cookie("apic_user", $('#apic_user').val(), { path:'/', expires: 1 });
         $.cookie("apic_pass", $('#apic_pass').val(), { path:'/', expires: 1 });
         $("#login2apic").hide();
+        apic_get_token().then(function(data){
+            set_apic_cookies(data);
+            location.reload();
+        });
     });
 
     if( $.cookie('havetoken') == 'Y'){
