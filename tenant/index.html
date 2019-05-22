@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+  <title>Dashboard</title>
 
   <!-- Custom fonts for this template-->
   <link href="css/fontawesome.min.css" rel="stylesheet" type="text/css">
@@ -293,35 +293,14 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Fabric Health</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
                   <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
+                        <canvas id="health_chart"></canvas>
                   </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
                   </div>
+                 </div>
                 </div>
               </div>
             </div>
@@ -384,28 +363,24 @@
 
 
   <!-- Bootstrap core JavaScript-->
-  <script src="js/jquery-3.3.1.js"></script>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/datatables.min.js"></script>
-  <script src="js/dataTables.bootstrap4.min.js"></script>
-  <script src="js/jquery.cookie.js"></script>
+  <script src="js/utils/jquery-3.3.1.js"></script>
+  <script src="js/utils/bootstrap.bundle.min.js"></script>
+  <script src="js/utils/datatables.min.js"></script>
+  <script src="js/utils/dataTables.bootstrap4.min.js"></script>
+  <script src="js/utils/jquery.cookie.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="js/jquery.easing.min.js"></script>
+  <script src="js/utils/jquery.easing.min.js"></script>
 
   <!-- All ACI JS files -->
-  <script src="js/apic_auth.js"></script>
-  <script src="js/apic.js"></script>
+  <script src="js/aci/apic_auth.js"></script>
+  <script src="js/aci/apic.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="js/utils/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="js/Chart.bundle.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="js/utils/Chart.bundle.min.js"></script>
 
 </body>
 
@@ -435,7 +410,6 @@ $(document).ready(function(){
                 $.cookie("token", attrs['token'], { path:'/', expires:1 })
                 $.cookie("urlToken", attrs['urlToken'], { path:'/', expires:1 })
                 get_fabric_node_data().then(proc_fabric_node_data).then( function(table_data){
-            
                     $("#device_table").DataTable({  
                         data: table_data,
                         bFilter: false,
@@ -450,6 +424,20 @@ $(document).ready(function(){
                     })
                 document.getElementById('device_table').style.fontSize = ".7em";
                 })
+                get_fabric_health_data().then(get_fabric_health).then(function(health_avg){
+                    top_health= 100 - parseInt(health_avg,10)
+                    var ctx = document.getElementById("health_chart");
+                    var myDoughnutChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: [top_health, health_avg],
+                        options: {
+                            legend: {
+                                display: false
+                                },
+                        }
+                    });
+                    //document.getElementById('health_average').innerHTML = health_avg + '%'
+                });
             })
         }else{
             $("#main_page_view").hide();

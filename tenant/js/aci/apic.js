@@ -19,7 +19,6 @@ function buildTableData(aci_endpoint_data) {
 }
 
 function get_fabric_node_data() {
-	console.log('Start->get_fabric_node_data()');
 	return $.ajax({
 		url     :
 			'https://' +
@@ -48,4 +47,19 @@ function proc_fabric_node_data(fabric_data) {
 		}
 	});
 	return table_data;
+}
+
+function get_fabric_health_data() {
+	return $.ajax({
+		url     : 'https://' + $.cookie('apic_ip') + '/api/node/mo/topology/HDfabricOverallHealth5min-0.json',
+		headers : {
+			DevCookie        : $.cookie('token'),
+			'APIC-challenge' : $.cookie('urlToken'),
+			'Content-Type'   : 'application/json'
+		}
+	});
+}
+
+function get_fabric_health(health_data) {
+	return health_data.imdata[0].fabricOverallHealthHist5min.attributes.healthAvg;
 }
