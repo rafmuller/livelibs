@@ -12,7 +12,9 @@ function classQuery(classname) {
 function buildTableData(aci_endpoint_data) {
 	table_data = [];
 	$.each(aci_endpoint_data['imdata'], function (i, endpoint) {
-		row = [endpoint.fvCEp.attributes.mac, endpoint.fvCEp.attributes.ip];
+		tenant_regex = /tn-([a-zA-Z0-9_.-]*)/;
+		fvCEpdn = endpoint.fvCEp.attributes.dn;
+		row = [endpoint.fvCEp.attributes.mac, endpoint.fvCEp.attributes.ip, fvCEpdn.match(tenant_regex)[1]];
 		table_data.push(row);
 	});
 	return table_data;

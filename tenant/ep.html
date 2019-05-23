@@ -249,18 +249,23 @@
                 set_apic_cookies(data);
                 var attrs = data['imdata'][0]['aaaLogin']['attributes'];
                 classQuery('fvCEp').then(buildTableData).then(function (table_data) {
-                    $("#endpoint-table").DataTable({
-                        data: table_data,
-                        columns: [{
+                    $("#endpoint-table").DataTable({ // using jQuery to select the HTML element with ID='endpoint-table'
+                        data: table_data, // and calling DataTable() to render the data
+                        columns: [ // constructed from buildTableData()
+                            {
                                 title: "MAC Address"
                             },
                             {
                                 title: "IP Address"
-                            }
+                            },
+                            {
+                                title: "Tenant"
+                            },
                         ]
                     })
                 });
             });
+
 
 
         });
