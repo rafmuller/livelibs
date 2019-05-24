@@ -50,6 +50,22 @@ function proc_fabric_node_data(fabric_data) {
 	return table_data;
 }
 
+function proc_fabric_leaf_list(fabric_data) {
+	table_data = [];
+	$.each(fabric_data['imdata'], function (i, device) {
+		if (device.dhcpClient.attributes.clientEvent == 'assigned' &&
+			device.dhcpClient.attributes.nodeRole == 'leaf') {
+			table_row = [
+				device.dhcpClient.attributes.name,
+				device.dhcpClient.attributes.id,
+			];
+			table_data.push(table_row);
+		}
+	});
+	return table_data;
+}
+
+
 function get_fabric_health_data() {
 	return $.ajax({
 		url: 'https://' + $.cookie('apic_ip') + '/api/node/mo/topology/HDfabricOverallHealth5min-0.json',

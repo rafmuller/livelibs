@@ -159,7 +159,7 @@
                     <!-- Page Heading -->
                     <div class='container-fluid'>
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Create Fabric Network</h1>
+                            <h1 class="h3 mb-0 text-gray-800">Create Network</h1>
                             <a id='login_form_button' href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fas fa-lock fa-sm text-white-50"></i> Login Form</a>
                         </div>
@@ -188,12 +188,51 @@
                     <div class="container-fluid" id='main_page_view' style='display:none;'>
 
 
-                        <!-- Content Row -->
-                        <div class="row">
+                        <form onsubmit="return false;">
+                            <div class="form-row">
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="inputEmail4">Network Name</label>
+                                    <input type="text" class="form-control" id="net_name" placeholder="Name">
+                                </div>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="inputPassword4">VLAN Encap</label>
+                                    <input type="text" class="form-control" id="vlan_encap" placeholder="vlan-231">
+                                </div>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="subnet">DG/mask</label>
+                                    <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
+                                </div>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="vrf">VRF</label>
+                                    <select id="vrf" class="form-control">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='form-row'>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="app">App Profile</label>
+                                    <select id="app" class="form-control">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="leaf">Leaf</label>
+                                    <select id="leaf" class="form-control">
+                                        <option selected>Choose...</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-sm-6 col-md-3">
+                                    <label for="port_number">Port</label>
+                                    <input type="text" class="form-control" id="port_number" placeholder="1/1">
+                                </div>
+                                <div class="form-group col-sm-2 col-md-2">
+                                    <label for="network_submit">&nbsp;</label>
+                                    <button type="submit" id='network_submit' class="btn btn-primary form-control">Submit</button>
+                                </div>
+                            </div>
+                        </form>
 
-                            <!-- Content Column -->
-
-                        </div>
 
                     </div>
                     <!-- /.container-fluid -->
@@ -257,6 +296,8 @@
         <!-- All ACI JS files -->
         <script src="js/aci/apic_auth.js"></script>
         <script src="js/aci/apic.js"></script>
+        <script src="js/aci/create_net.js"></script>
+
 
         <!-- Custom scripts for all pages-->
         <script src="js/utils/sb-admin-2.min.js"></script>
@@ -305,7 +346,23 @@
                         path: '/',
                         expires: 1
                     })
+                    get_tenant_object(tenant_name).then(get_tenant_vrf).then(function (tenant_list) {
+                        $.each(tenant_list, function (index, vrf) {
+                            $("#vrf").append(new Option(vrf, vrf));
+                        })
+                    });
 
+                    get_tenant_object(tenant_name).then(get_tenant_app).then(function (app_list) {
+                        $.each(app_list, function (index, app) {
+                            $("#app").append(new Option(app, app));
+                        })
+                    });
+
+                    get_fabric_node_data().then(proc_fabric_leaf_list).then(function (table_data) {
+                        $.each(table_data, function (key, row) {
+                            $("#leaf").append(new Option(row[0] + ' - ' + row[2], row[0]));
+                        });
+                    });
                 })
             } else {
                 $("#main_page_view").hide();
