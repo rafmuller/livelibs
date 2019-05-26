@@ -163,8 +163,10 @@
                             <a id='login_form_button' href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fas fa-lock fa-sm text-white-50"></i> Login Form</a>
                         </div>
+
+
                         <form onsubmit="return false;">
-                            <div id='login2apic' class="form-row" style='magin-top:10px; margin-bottom:60px; display: none'>
+                            <div id='login2apic' class="form-row" style='margin-top:10px; margin-bottom:60px; display: none'>
                                 <div class="col">
                                     <label>APIC IP Address:</label>
                                     <input type="text" id='apic_ip' name='apic_ip' class="form-control" placeholder="10.0.226.4x">
@@ -186,52 +188,99 @@
                     </div>
                     <!-- Begin Page Content -->
                     <div class="container-fluid" id='main_page_view' style='display:none;'>
-
-
-                        <form onsubmit="return false;">
-                            <div class="form-row">
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="inputEmail4">Network Name</label>
-                                    <input type="text" class="form-control" id="net_name" placeholder="Name">
+                        <div class='row'>
+                            <form onsubmit="return false;">
+                                <div class="form-row">
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="inputEmail4">Network Name</label>
+                                        <input type="text" class="form-control" id="net_name" placeholder="Name">
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="inputPassword4">VLAN Encap</label>
+                                        <input type="text" class="form-control" id="vlan_encap" placeholder="vlan-231">
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="subnet">DG/mask</label>
+                                        <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="vrf">VRF</label>
+                                        <select id="vrf" class="form-control">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="inputPassword4">VLAN Encap</label>
-                                    <input type="text" class="form-control" id="vlan_encap" placeholder="vlan-231">
+                                <div class='form-row'>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="app">App Profile</label>
+                                        <select id="app" class="form-control">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="leaf">Leaf</label>
+                                        <select id="leaf" class="form-control">
+                                            <option selected>Choose...</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-sm-6 col-md-3">
+                                        <label for="port_number">Port</label>
+                                        <input type="text" class="form-control" id="port_number" placeholder="1/1">
+                                    </div>
+                                    <div class="form-group col-sm-2 col-md-2">
+                                        <label for="network_submit">&nbsp;</label>
+                                        <button type="submit" id='network_submit' class="btn btn-primary form-control">Submit</button>
+                                    </div>
                                 </div>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="subnet">DG/mask</label>
-                                    <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
-                                </div>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="vrf">VRF</label>
-                                    <select id="vrf" class="form-control">
-                                        <option selected>Choose...</option>
-                                    </select>
+                            </form>
+                        </div>
+                        <div class='row'>
+                            <div class="col-sm-3">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">App Profile</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area" style='height:auto;'>
+                                            <ul id='ap_ul'></ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class='form-row'>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="app">App Profile</label>
-                                    <select id="app" class="form-control">
-                                        <option selected>Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="leaf">Leaf</label>
-                                    <select id="leaf" class="form-control">
-                                        <option selected>Choose...</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6 col-md-3">
-                                    <label for="port_number">Port</label>
-                                    <input type="text" class="form-control" id="port_number" placeholder="1/1">
-                                </div>
-                                <div class="form-group col-sm-2 col-md-2">
-                                    <label for="network_submit">&nbsp;</label>
-                                    <button type="submit" id='network_submit' class="btn btn-primary form-control">Submit</button>
+                            <div class="col-sm-3">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">VRF</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area" style='height:auto;'>
+                                            <ul id='vrf_ul'></ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                            <div class="col-sm-6">
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Networks</h6>
+                                    </div>
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <div class="chart-area" style='height:auto;'>
+                                            <ul id='bd_ul'>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
 
 
                     </div>
@@ -298,7 +347,6 @@
         <script src="js/aci/apic.js"></script>
         <script src="js/aci/create_net.js"></script>
 
-
         <!-- Custom scripts for all pages-->
         <script src="js/utils/sb-admin-2.min.js"></script>
 
@@ -306,9 +354,12 @@
         <script src="js/utils/Chart.bundle.min.js"></script>
 
     </body>
-
-
     <script type="text/javascript">
+        var tenant_name = 'aciproglab01'
+        var bd_table = []
+        var vrf_table = []
+        var epg_table = []
+
         $(document).ready(function () {
             $('#login_form_button').click(function () {
                 $("#login2apic").show();
@@ -346,15 +397,30 @@
                         path: '/',
                         expires: 1
                     })
-                    get_tenant_object(tenant_name).then(get_tenant_vrf).then(function (tenant_list) {
-                        $.each(tenant_list, function (index, vrf) {
-                            $("#vrf").append(new Option(vrf, vrf));
+
+                    get_tenant_vrf(tenant_name).then(proc_vrf_data).then(function (vrf_data) {
+                        $.each(vrf_data, function (index, row) {
+                            $('#vrf_ul').append('<li>' + row[0] + '</li>');
+                            $("#vrf").append(new Option(row[0], row[0]));
                         })
                     });
 
-                    get_tenant_object(tenant_name).then(get_tenant_app).then(function (app_list) {
-                        $.each(app_list, function (index, app) {
-                            $("#app").append(new Option(app, app));
+                    get_tenant_bd(tenant_name).then(proc_bd_data).then(function (bd_data) {
+                        $.each(bd_data, function (index, row) {
+                            $('#bd_ul').append('<li>' + row[0] + '/' + row[1] + '/' + row[2] + '/' + row[3] + '</li>');
+                        })
+                    });
+
+                    get_tenant_epg(tenant_name).then(proc_epg_data).then(function (epg_data) {
+                        $.each(epg_data, function (index, row) {
+                            $('#epg_ul').append('<li>' + row[0] + '</li>');
+                        })
+                    });
+
+                    get_tenant_ap(tenant_name).then(proc_ap_data).then(function (ap_data) {
+                        $.each(ap_data, function (index, row) {
+                            $('#ap_ul').append('<li>' + row[0] + '</li>');
+                            $("#app").append(new Option(row[0], row[0]));
                         })
                     });
 
