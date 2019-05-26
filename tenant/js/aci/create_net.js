@@ -37,7 +37,7 @@ function proc_bd_data(bd_objects) {
                 bd_subnet = bd_children.fvSubnet.attributes.ip;
             }
         });
-        bd_list.push([bd_name, bd_vrf, bd_epg, bd_subnet])
+        bd_list.push([bd_vrf, bd_name, bd_subnet, bd_epg])
     });
     return bd_list;
 }

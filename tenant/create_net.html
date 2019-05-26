@@ -191,46 +191,33 @@
                         <div class='row'>
                             <form onsubmit="return false;">
                                 <div class="form-row">
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="inputEmail4">Network Name</label>
-                                        <input type="text" class="form-control" id="net_name" placeholder="Name">
-                                    </div>
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="inputPassword4">VLAN Encap</label>
-                                        <input type="text" class="form-control" id="vlan_encap" placeholder="vlan-231">
-                                    </div>
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="subnet">DG/mask</label>
-                                        <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
-                                    </div>
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="vrf">VRF</label>
-                                        <select id="vrf" class="form-control">
-                                            <option selected>Choose...</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class='form-row'>
-                                    <div class="form-group col-sm-6 col-md-3">
+                                    <div class="col">
                                         <label for="app">App Profile</label>
                                         <select id="app" class="form-control">
                                             <option selected>Choose...</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="leaf">Leaf</label>
-                                        <select id="leaf" class="form-control">
+                                    <div class="col">
+                                        <label for="vrf">VRF</label>
+                                        <select id="vrf" class="form-control">
                                             <option selected>Choose...</option>
                                         </select>
                                     </div>
-                                    <div class="form-group col-sm-6 col-md-3">
-                                        <label for="port_number">Port</label>
-                                        <input type="text" class="form-control" id="port_number" placeholder="1/1">
+                                    <div class="col">
+                                        <label for="inputEmail4">Network Name</label>
+                                        <input type="text" class="form-control" id="net_name" placeholder="Name">
                                     </div>
-                                    <div class="form-group col-sm-2 col-md-2">
+                                    <div class="col">
+                                        <label for="subnet">DG/mask</label>
+                                        <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
+                                    </div>
+                                    <div class="col">
                                         <label for="network_submit">&nbsp;</label>
                                         <button type="submit" id='network_submit' class="btn btn-primary form-control">Submit</button>
                                     </div>
+                                </div>
+                                <div class='form-group form-row'>
+
                                 </div>
                             </form>
                         </div>
@@ -271,6 +258,10 @@
                                     </div>
                                     <!-- Card Body -->
                                     <div class="card-body">
+                                        <div class='table-reponsive'>
+                                            <table id="net_table" class="table table-condensed table-striped table-hover">
+                                            </table>
+                                        </div>
                                         <div class="chart-area" style='height:auto;'>
                                             <ul id='bd_ul'>
                                             </ul>
@@ -406,9 +397,27 @@
                     });
 
                     get_tenant_bd(tenant_name).then(proc_bd_data).then(function (bd_data) {
-                        $.each(bd_data, function (index, row) {
-                            $('#bd_ul').append('<li>' + row[0] + '/' + row[1] + '/' + row[2] + '/' + row[3] + '</li>');
-                        })
+                        $("#net_table").DataTable({
+                            data: bd_data,
+                            bFilter: false,
+                            "paging": false,
+                            "bInfo": false,
+                            "bLengthChange": false,
+                            columns: [{
+                                    title: "VRF"
+                                },
+                                {
+                                    title: "BD"
+                                },
+                                {
+                                    title: "Subnet"
+                                },
+                                {
+                                    title: "EPG"
+                                },
+                            ]
+                        });
+                        document.getElementById('net_table').style.fontSize = ".7em";
                     });
 
                     get_tenant_epg(tenant_name).then(proc_epg_data).then(function (epg_data) {
@@ -435,6 +444,33 @@
             }
 
         });
+
+
+
+        get_fabric_node_data().then(proc_fabric_node_data).then(function (table_data) {
+            $("#device_table").DataTable({
+                data: table_data,
+                bFilter: false,
+                "bLengthChange": false,
+                columns: [{
+                        title: "Name"
+                    },
+                    {
+                        title: "Serial"
+                    },
+                    {
+                        title: "ID"
+                    },
+                    {
+                        title: "Model"
+                    },
+                    {
+                        title: "Version"
+                    }
+                ]
+            })
+            document.getElementById('device_table').style.fontSize = ".7em";
+        })
     </script>
 
 </html>
