@@ -189,7 +189,7 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid" id='main_page_view' style='display:none;'>
                         <div class='row'>
-                            <form onsubmit="return false;">
+                            <form id='net_form' onsubmit="return false;">
                                 <div class="form-row">
                                     <div class="col">
                                         <label for="app">App Profile</label>
@@ -472,6 +472,15 @@
             })
             document.getElementById('device_table').style.fontSize = ".7em";
         })
+
+        $("#net_form").submit(function (event) {
+            console.log("New network to create in ACI!");
+            tenant = tenant_name;
+            app_profile = $("#app").val();
+            vrf = $("#vrf").val();
+            bd_name = $("#net_name").val();
+            subnet = $("#subnet").val();
+        });
     </script>
 
 </html>
