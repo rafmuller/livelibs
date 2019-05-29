@@ -31,7 +31,7 @@ function set_apic_cookies(data) {
 function logout_apic() {
 	$.removeCookie('havetoken');
 	$.removeCookie('token');
-	$.removeCookie('urltoken');
+	$.removeCookie('urlToken');
 	$.removeCookie('apic_ip');
 	$.removeCookie('apic_user');
 	$.removeCookie('apic_pass');
