@@ -347,10 +347,7 @@
 
     </body>
     <script type="text/javascript">
-        var tenant_name = 'aciproglab01'
-        var bd_table = []
-        var vrf_table = []
-        var epg_table = []
+        var tenant_name = ''
 
         $(document).ready(function () {
             $('#login_form_button').click(function () {
@@ -474,12 +471,12 @@
         })
 
         $("#net_form").submit(function (event) {
-            console.log("New network to create in ACI!");
             tenant = tenant_name;
             app_profile = $("#app").val();
             vrf = $("#vrf").val();
             bd_name = $("#net_name").val();
-            subnet = $("#subnet").val();
+            bd_subnet = $("#subnet").val();
+
         });
     </script>
 
