@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="col">
                                         <label for="subnet">DG/mask</label>
-                                        <input type="text" class="form-control" id="subnet" placeholder="10.1.1.1/24">
+                                        <input type="text" class="form-control" id="subnet" placeholder="IP/Mask">
                                     </div>
                                     <div class="col">
                                         <label for="network_submit">&nbsp;</label>
@@ -471,7 +471,6 @@
         })
 
         $("#net_form").submit(function (event) {
-            tenant = tenant_name;
             app_profile = $("#app").val();
             vrf = $("#vrf").val();
             bd_name = $("#net_name").val();
