@@ -1,7 +1,7 @@
 function apic_get_token() {
 	return $.ajax({
 		type: 'POST',
-		url: 'https://' + $.cookie('apic_ip') + '/api/aaaLogin.json?gui-token-request=yes',
+		url: 'http://' + $.cookie('apic_ip') + '/api/aaaLogin.json?gui-token-request=yes',
 		data: JSON.stringify({
 			aaaUser: {
 				attributes: {

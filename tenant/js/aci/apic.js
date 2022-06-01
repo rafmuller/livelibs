@@ -1,6 +1,6 @@
 function classQuery(classname) {
 	return $.ajax({
-		url: 'https://' + $.cookie('apic_ip') + '/api/node/class/' + classname + '.json',
+		url: 'http://' + $.cookie('apic_ip') + '/api/node/class/' + classname + '.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
@@ -11,18 +11,23 @@ function classQuery(classname) {
 
 function buildTableData(aci_endpoint_data) {
 	table_data = [];
+	regex = /tn-(\w*)\/ap-(\w*)\/epg-(\w*)\/cep-(\w*:\w*:\w*:\w*:\w*:\w*)/
 	$.each(aci_endpoint_data['imdata'], function (i, endpoint) {
-		tenant_regex = /tn-([a-zA-Z0-9_.-]*)/;
-		fvCEpdn = endpoint.fvCEp.attributes.dn;
-		row = [endpoint.fvCEp.attributes.mac, endpoint.fvCEp.attributes.ip, fvCEpdn.match(tenant_regex)[1]];
-		table_data.push(row);
+		var line_dn = regex.exec(endpoint.fvCEp.attributes.dn)
+		if (line_dn) {
+			var tenant = line_dn[1]
+			var app_profile = line_dn[2]
+			var epg = line_dn[3]
+			row = [endpoint.fvCEp.attributes.mac, tenant, app_profile, epg];
+			table_data.push(row);
+		}
 	});
 	return table_data;
 }
 
 function get_fabric_node_data() {
 	return $.ajax({
-		url: 'https://' +
+		url: 'http://' +
 			$.cookie('apic_ip') +
 			'/api/node/class/dhcpClient.json?query-target-filter=and(not(wcard(dhcpClient.dn,%22__ui_%22)),and(and(ne(dhcpClient.nodeId,"0"),ne(dhcpClient.ip,"0.0.0.0")),or(eq(dhcpClient.nodeRole,"spine"),eq(dhcpClient.nodeRole,"leaf"))))',
 		headers: {
@@ -68,7 +73,7 @@ function proc_fabric_leaf_list(fabric_data) {
 
 function get_fabric_health_data() {
 	return $.ajax({
-		url: 'https://' + $.cookie('apic_ip') + '/api/node/mo/topology/HDfabricOverallHealth5min-0.json',
+		url: 'http://' + $.cookie('apic_ip') + '/api/node/mo/topology/HDfabricOverallHealth5min-0.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),

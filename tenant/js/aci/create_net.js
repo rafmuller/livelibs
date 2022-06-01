@@ -1,6 +1,6 @@
 function get_tenant_object(tenant) {
     return $.ajax({
-        url: 'https://' + $.cookie('apic_ip') + '/api/mo/uni/tn-' + tenant + '.json?rsp-subtree=children',
+        url: 'http://' + $.cookie('apic_ip') + '/api/mo/uni/tn-' + tenant + '.json?rsp-subtree=children',
         headers: {
             DevCookie: $.cookie('token'),
             'APIC-challenge': $.cookie('urlToken'),
@@ -11,7 +11,7 @@ function get_tenant_object(tenant) {
 
 function get_tenant_bd(tenant) {
     return $.ajax({
-        url: 'https://' + $.cookie('apic_ip') + '/api/node/class/fvBD.json?query-target-filter=and(wcard(fvBD.dn,"' + tenant + '"))&rsp-subtree=children',
+        url: 'http://' + $.cookie('apic_ip') + '/api/node/class/fvBD.json?query-target-filter=and(wcard(fvBD.dn,"' + tenant + '"))&rsp-subtree=children',
         headers: {
             DevCookie: $.cookie('token'),
             'APIC-challenge': $.cookie('urlToken'),
@@ -44,7 +44,7 @@ function proc_bd_data(bd_objects) {
 
 function get_tenant_vrf(tenant) {
     return $.ajax({
-        url: 'https://' + $.cookie('apic_ip') + '/api/node/class/fvCtx.json?query-target-filter=and(wcard(fvBD.dn,"' + tenant + '"))&rsp-subtree=children',
+        url: 'http://' + $.cookie('apic_ip') + '/api/node/class/fvCtx.json?query-target-filter=and(wcard(fvBD.dn,"' + tenant + '"))&rsp-subtree=children',
         headers: {
             DevCookie: $.cookie('token'),
             'APIC-challenge': $.cookie('urlToken'),
@@ -65,7 +65,7 @@ function proc_vrf_data(vrf_objects) {
 
 function get_tenant_epg(tenant) {
     return $.ajax({
-        url: 'https://' + $.cookie('apic_ip') + '/api/node/class/fvAEPg.json?query-target-filter=and(wcard(fvAEPg.dn,"' + tenant + '"))',
+        url: 'http://' + $.cookie('apic_ip') + '/api/node/class/fvAEPg.json?query-target-filter=and(wcard(fvAEPg.dn,"' + tenant + '"))',
         headers: {
             DevCookie: $.cookie('token'),
             'APIC-challenge': $.cookie('urlToken'),
@@ -85,7 +85,7 @@ function proc_epg_data(epg_objects) {
 
 function get_tenant_ap(tenant) {
     return $.ajax({
-        url: 'https://' + $.cookie('apic_ip') + '/api/node/class/fvAp.json?query-target-filter=and(wcard(fvAp.dn,"' + tenant + '"))&rsp-subtree=children',
+        url: 'http://' + $.cookie('apic_ip') + '/api/node/class/fvAp.json?query-target-filter=and(wcard(fvAp.dn,"' + tenant + '"))&rsp-subtree=children',
         headers: {
             DevCookie: $.cookie('token'),
             'APIC-challenge': $.cookie('urlToken'),
