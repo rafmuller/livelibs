@@ -1,6 +1,6 @@
 function classQuery(classname) {
 	return $.ajax({
-		url: 'http://' + $.cookie('apic_ip') + '/api/node/class/' + classname + '.json',
+		url: 'https://' + $.cookie('apic_ip') + '/api/node/class/' + classname + '.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
@@ -27,7 +27,7 @@ function buildTableData(aci_endpoint_data) {
 
 function get_fabric_node_data() {
 	return $.ajax({
-		url: 'http://' +
+		url: 'https://' +
 			$.cookie('apic_ip') +
 			'/api/node/class/dhcpClient.json?query-target-filter=and(not(wcard(dhcpClient.dn,%22__ui_%22)),and(and(ne(dhcpClient.nodeId,"0"),ne(dhcpClient.ip,"0.0.0.0")),or(eq(dhcpClient.nodeRole,"spine"),eq(dhcpClient.nodeRole,"leaf"))))',
 		headers: {
@@ -71,7 +71,7 @@ function proc_fabric_leaf_list(fabric_data) {
 
 function get_fabric_health_data() {
 	return $.ajax({
-		url: 'http://' + $.cookie('apic_ip') + '/api/node/mo/topology/health.json',
+		url: 'https://' + $.cookie('apic_ip') + '/api/node/mo/topology/health.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
@@ -86,7 +86,7 @@ function get_fabric_health(health_data) {
 
 function get_fabric_fault_data() {
 	return $.ajax({
-		url: 'http://' + $.cookie('apic_ip') + '/api/class/faultCountsWithDetails.json',
+		url: 'https://' + $.cookie('apic_ip') + '/api/class/faultCountsWithDetails.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
@@ -107,7 +107,7 @@ function process_fabric_fault_data(fabric_fault_data) {
 
 function get_fabric_tenants() {
 	return $.ajax({
-		url: 'http://' + $.cookie('apic_ip') + '/api/class/fvTenant.json',
+		url: 'https://' + $.cookie('apic_ip') + '/api/class/fvTenant.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
@@ -118,7 +118,7 @@ function get_fabric_tenants() {
 
 function get_fabric_dashenpoints() {
 	return $.ajax({
-		url: 'http://' + $.cookie('apic_ip') + '/api/class/fvCEp.json',
+		url: 'https://' + $.cookie('apic_ip') + '/api/class/fvCEp.json',
 		headers: {
 			DevCookie: $.cookie('token'),
 			'APIC-challenge': $.cookie('urlToken'),
